@@ -4,6 +4,8 @@ use App\Http\Controllers\{ProfileController, PostController};
 use Illuminate\Support\Facades\{Route, Mail};
 use App\Mail\PostPublished;
 use App\Jobs\SendMail;
+use App\Events\UserRegistered;
+use Illuminate\Support\Facades\App;
 
 Route::get('/', function () {
     return view('welcome');
@@ -32,14 +34,15 @@ Route::get('/send-mail', function () {
     dd('Mail Has Been Sent');
 });
 
-// $message->from('john@johndoe.com', 'John Doe');
-// $message->sender('john@johndoe.com', 'John Doe');
-// $message->to('john@johndoe.com', 'John Doe');
-// $message->cc('john@johndoe.com', 'John Doe');
-// $message->bcc('john@johndoe.com', 'John Doe');
-// $message->replyTo('john@johndoe.com', 'John Doe');
-// $message->subject('Subject');
-// $message->priority(3);
-// $message->attach('pathToFile');
+Route::get('/user-register', function () {
+    $email = 'user@app.com';
+    event(new UserRegistered($email));
+    dd('Message Sent');
+});
+
+Route::get('/greeting/{locale}', function ($locale) {
+    App::setLocale($locale);
+    return view('greeting');
+})->name('greeting');
 
 require __DIR__.'/auth.php';
