@@ -6,13 +6,15 @@ use App\Mail\PostPublished;
 use App\Jobs\SendMail;
 use App\Events\UserRegistered;
 use Illuminate\Support\Facades\App;
+use App\Models\User;
+use App\DataTables\UsersDataTable;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
+Route::get('/dashboard', function (UsersDataTable $dataTable) {
+    return $dataTable->render('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
