@@ -8,14 +8,21 @@ use App\Events\UserRegistered;
 use Illuminate\Support\Facades\App;
 use App\Models\User;
 use App\DataTables\UsersDataTable;
+use App\Http\Controllers\Admin\DashboardController;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function (UsersDataTable $dataTable) {
-    return $dataTable->render('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/user/{id}/edit', function ($id) {
+//     return '<h1>'.$id.'</h1>';
+// })->name('user.edit');
+
+// Route::get('/dashboard', function (UsersDataTable $dataTable) {
+//     return $dataTable->render('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware(['auth', 'verified']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
