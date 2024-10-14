@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\{ProfileController, PostController};
+use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\{Route, Mail};
 use App\Mail\PostPublished;
 use App\Jobs\SendMail;
@@ -8,10 +8,10 @@ use App\Events\UserRegistered;
 use Illuminate\Support\Facades\App;
 use App\Models\User;
 use App\DataTables\UsersDataTable;
-use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\{DashboardController, ProfileController};
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('frontend.home');
 });
 
 // Route::get('/user/{id}/edit', function ($id) {
