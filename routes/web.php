@@ -8,10 +8,22 @@ use App\Events\UserRegistered;
 use Illuminate\Support\Facades\App;
 use App\Models\User;
 use App\DataTables\UsersDataTable;
-use App\Http\Controllers\Admin\{DashboardController, ProfileController};
+use App\Http\Controllers\Admin\{DashboardController, ProfileController, HeroController};
 
 Route::get('/', function () {
     return view('frontend.home');
+});
+
+Route::get('/blog', function () {
+    return view('frontend.blog');
+});
+
+Route::get('/blog-detail', function () {
+    return view('frontend.blog-detail');
+});
+
+Route::get('/portfolio-detail', function () {
+    return view('frontend.portfolio-detail');
 });
 
 // Route::get('/user/{id}/edit', function ($id) {
@@ -55,3 +67,7 @@ Route::get('/greeting/{locale}', function ($locale) {
 })->name('greeting');
 
 require __DIR__.'/auth.php';
+
+Route::group(['middleware'=>['auth'], 'prefix'=>'admin', 'as'=>'admin.'], function () {
+    Route::resource('hero', HeroController::class);
+});
