@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Hero;
+use File;
 
 class HeroController extends Controller
 {
@@ -12,7 +14,8 @@ class HeroController extends Controller
      */
     public function index()
     {
-        return view('admin.hero.index');
+        $hero = Hero::first();
+        return view('admin.hero.index', compact('hero'));
     }
 
     /**
@@ -50,13 +53,38 @@ class HeroController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
         $request->validate([
             'title'=>['required', 'max:200'],
             'sub_title'=>['required', 'max:500'],
+            'image'=>['max:3000','image'],
         ]);
-        dd($request->all());
+        $hero = Hero::first();
+        if ($request->hasFile('image')) {
+            if ($hero && File::exists(public_path($hero->image))) {
+                File::delete(public_path($hero->image));
+            }
+            $image = $request->file('image');
+            $imageName = rand().$image->getClientOriginalName();
+            $image->move(public_path('/hero_uploads'), $imageName);
+            $imagePath = "/hero_uploads/". $imageName;
+            // dd($imagePath);
+        }
+        Hero::updateOrCreate(
+            ['id'=>$id],
+            [
+                'title'=>$request->title,
+                'sub_title'=>$request->sub_title,
+                'btn_text'=>$request->btn_text,
+                'btn_url'=>$request->btn_url,
+                'image'=>isset($imagePath) ? $imagePath : $hero->image,
+            ]
+        );
+        toastr()->success('Uploaded Successfully.');
+        return redirect()->back();
+        // dd('Success');
+        // dd($request->all());
     }
 
     /**

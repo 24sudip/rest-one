@@ -16,10 +16,12 @@
     <link rel="stylesheet" href="{{ asset('backend_assets/css') }}/plugins/bootstrap-timepicker.min.css">
     <link rel="stylesheet" href="{{ asset('backend_assets/css') }}/plugins/daterangepicker.css">
     <link rel="stylesheet" href="{{ asset('backend_assets/css') }}/plugins/select2.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
     <!-- Template CSS -->
     <link rel="stylesheet" href="{{ asset('backend_assets/css') }}/style.css">
     <link rel="stylesheet" href="{{ asset('backend_assets/css') }}/components.css">
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
 <body>
@@ -67,5 +69,16 @@
     <script src="{{ asset('backend_assets/js') }}/page/features-post-create.js"></script>
     <!-- Page Specific JS File -->
     <script src="{{ asset('backend_assets/js') }}/page/forms-advanced-forms.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+    <!-- Show Dynamic Validation Errors -->
+    <script>
+        @if (!empty($errors->all()))
+            @foreach ($errors->all() as $error)
+            toastr.error("{{ $error }}");
+            @endforeach
+        @endif
+    </script>
+    @stack('scripts')
 </body>
 </html>

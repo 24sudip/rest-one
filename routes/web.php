@@ -1,18 +1,10 @@
 <?php
 
-use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\{Route, Mail};
-use App\Mail\PostPublished;
-use App\Jobs\SendMail;
-use App\Events\UserRegistered;
-use Illuminate\Support\Facades\App;
-use App\Models\User;
-use App\DataTables\UsersDataTable;
-use App\Http\Controllers\Admin\{DashboardController, ProfileController, HeroController};
+use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\Admin\{DashboardController, ProfileController, HeroController, TyperTitleController};
 
-Route::get('/', function () {
-    return view('frontend.home');
-});
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/blog', function () {
     return view('frontend.blog');
@@ -26,14 +18,6 @@ Route::get('/portfolio-detail', function () {
     return view('frontend.portfolio-detail');
 });
 
-// Route::get('/user/{id}/edit', function ($id) {
-//     return '<h1>'.$id.'</h1>';
-// })->name('user.edit');
-
-// Route::get('/dashboard', function (UsersDataTable $dataTable) {
-//     return $dataTable->render('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
-
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware(['auth', 'verified']);
 
 Route::middleware('auth')->group(function () {
@@ -42,32 +26,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::group(['middleware'=>'auth'], function () {
-    Route::get('/posts/trash', [PostController::class, 'trashed'])->name('posts.trashed');
-    Route::get('/posts/{id}/restore', [PostController::class, 'restore'])->name('posts.restore');
-    Route::delete('/posts/{id}/force-delete', [PostController::class, 'forceDelete'])->name('posts.force.delete');
-
-    Route::resource('posts', PostController::class);
-});
-
-Route::get('/send-mail', function () {
-    SendMail::dispatch();
-    dd('Mail Has Been Sent');
-});
-
-Route::get('/user-register', function () {
-    $email = 'user@app.com';
-    event(new UserRegistered($email));
-    dd('Message Sent');
-});
-
-Route::get('/greeting/{locale}', function ($locale) {
-    App::setLocale($locale);
-    return view('greeting');
-})->name('greeting');
-
 require __DIR__.'/auth.php';
 
 Route::group(['middleware'=>['auth'], 'prefix'=>'admin', 'as'=>'admin.'], function () {
     Route::resource('hero', HeroController::class);
+    Route::resource('typer-title', TyperTitleController::class);
 });
