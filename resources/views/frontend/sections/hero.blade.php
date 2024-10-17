@@ -20,3 +20,16 @@ style="background: url('{{ asset($hero->image) }}') no-repeat center / cover">
         </div>
     </div>
 </header>
+
+@push('scripts')
+    <script>
+        @php
+            $titles = [];
+            forEach($typer_titles as $title) {
+                $titles[] = $title->title;
+            }
+            $titles = json_encode($titles);
+        @endphp
+        $('.header-area .typer-title').typer({!! $titles !!});
+    </script>
+@endpush

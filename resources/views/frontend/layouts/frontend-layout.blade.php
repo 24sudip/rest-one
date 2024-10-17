@@ -38,6 +38,7 @@
 	<script src="{{ asset('frontend_assets/js') }}/jquery-plugin-collection.js"></script>
 	<script src="{{ asset('frontend_assets/js') }}/vendor/modernizr.js"></script>
 	<script src="{{ asset('frontend_assets/js') }}/main.js"></script>
+    @stack('scripts')
 </body>
 
 </html>

@@ -52,24 +52,33 @@ class TyperTitleController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+        $typer_title = TyperTitle::findOrFail($id);
+        return view('admin.typer-title.edit', compact('typer_title'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'title'=>['required','max:200']
+        ]);
+        $typer_title = TyperTitle::findOrFail($id);
+        $typer_title->title = $request->title;
+        $typer_title->save();
+        toastr()->success('Typer Title Updated Successfully.');
+        return redirect()->route('admin.typer-title.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        $typer_title = TyperTitle::findOrFail($id);
+        $typer_title->delete();
     }
 }
