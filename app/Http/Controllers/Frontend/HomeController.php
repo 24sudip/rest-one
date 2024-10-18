@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use File;
-use App\Models\{Hero, TyperTitle};
+use App\Models\{Hero, TyperTitle, Service};
 
 class HomeController extends Controller
 {
@@ -13,6 +13,7 @@ class HomeController extends Controller
     {
         $hero = Hero::first();
         $typer_titles = TyperTitle::all();
-        return view('frontend.home', compact('hero','typer_titles'));
+        $services = Service::all();
+        return view('frontend.home', compact('hero','typer_titles','services'));
     }
 }
