@@ -1,0 +1,12 @@
+প্রথম আলো,ইত্তেফাক,যুগান্তর,কালের কণ্ঠ,বণিক বার্তা,নয়া দিগন্ত,আমাদের সময়,আলোকিত বাংলাদেশ,সমকাল,সময়ের আলো,জনকণ্ঠ,সংবাদ চর্চা,বাংলাদেশপ্রতিদিন,
+Daily Star,দৈনিক রুপান্তর,New Age,Express,Observer,আজকের পত্রিকা,যায়যায় দিন,
+info@yourDomain.com
+userOne,wp-login
+http://localhost/wordpress/wp-login.php
+*-*-*-*
+ribbon,tool,group,dialog-box-launcher,Vertical-Scroll-Bar,Horizontal-Scroll-Bar,Status-Bar;
+ToTal Cell-17,17,98,691;
+ToTal Row-10,48,576;
+ToTal Column-16,384;
+Last Column-XFD;
+Zoom-In: 400%;

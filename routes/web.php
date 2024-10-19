@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\{Route, Mail};
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Admin\{DashboardController, ProfileController, HeroController, TyperTitleController, ServiceController};
+use App\Http\Controllers\Admin\{AboutController, CategoryController};
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -34,4 +35,9 @@ Route::group(['middleware'=>['auth'], 'prefix'=>'admin', 'as'=>'admin.'], functi
     Route::resource('typer-title', TyperTitleController::class);
     /* Service Route */
     Route::resource('service', ServiceController::class);
+    /* About Route */
+    Route::get('resume/download', [AboutController::class, 'resumeDownload'])->name('resume.download');
+    Route::resource('about', AboutController::class);
+    /* Category Route */
+    Route::resource('category', CategoryController::class);
 });
