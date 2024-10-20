@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\DataTables\CategoryDataTable;
+use App\Models\Category;
+use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
@@ -29,7 +31,15 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name'=>['required','max:200']
+        ]);
+        $category = new Category();
+        $category->name = $request->name;
+        $category->slug = Str::slug($request->name);
+        $category->save();
+        toastr()->success('Category Created Successfully.');
+        return redirect()->route('admin.category.index');
     }
 
     /**
@@ -43,24 +53,34 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+        $category = Category::findOrFail($id);
+        return view('admin.portfolio-category.edit', compact('category'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name'=>['required','max:200']
+        ]);
+        $category = Category::findOrFail($id);
+        $category->name = $request->name;
+        $category->slug = Str::slug($request->name);
+        $category->save();
+        toastr()->success('Category Updated Successfully.');
+        return redirect()->route('admin.category.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        $category = Category::findOrFail($id);
+        $category->delete();
     }
 }

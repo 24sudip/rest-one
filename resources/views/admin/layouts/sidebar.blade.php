@@ -66,7 +66,7 @@
                     </a>
                     <ul class="dropdown-menu" style="display: none;">
                         <li><a class="nav-link" href="{{ route('admin.category.index') }}">Category</a></li>
-                        <li><a class="nav-link" href="">test</a></li>
+                        <li><a class="nav-link" href="{{ route('admin.portfolio-item.index') }}">Portfolio Item</a></li>
                     </ul>
                 </li>
                 {{-- <li><a class="nav-link" href="features-profile.html"><i class="far fa-square"></i> <span>Profile</span></a></li>

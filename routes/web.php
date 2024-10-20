@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\{Route, Mail};
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Admin\{DashboardController, ProfileController, HeroController, TyperTitleController, ServiceController};
-use App\Http\Controllers\Admin\{AboutController, CategoryController};
+use App\Http\Controllers\Admin\{AboutController, CategoryController, PortfolioItemController};
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -38,6 +38,8 @@ Route::group(['middleware'=>['auth'], 'prefix'=>'admin', 'as'=>'admin.'], functi
     /* About Route */
     Route::get('resume/download', [AboutController::class, 'resumeDownload'])->name('resume.download');
     Route::resource('about', AboutController::class);
-    /* Category Route */
+    /* Portfolio Category Route */
     Route::resource('category', CategoryController::class);
+    /* Portfolio Item Route */
+    Route::resource('portfolio-item', PortfolioItemController::class);
 });
