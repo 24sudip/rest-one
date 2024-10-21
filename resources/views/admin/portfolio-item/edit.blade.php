@@ -1,4 +1,4 @@
-<!-- Simplicity is the ultimate sophistication. - Leonardo da Vinci -->
+<!-- Live as if you were to die tomorrow. Learn as if you were to live forever. - Mahatma Gandhi -->
 @extends('admin.layouts.admin-layout')
 
 @section('admin_content')
@@ -15,11 +15,12 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Create Portfolio Item</h4>
+                        <h4>Edit Portfolio Item</h4>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('admin.portfolio-item.store') }}" method="post" enctype="multipart/form-data">
+                        <form action="{{ route('admin.portfolio-item.update', $portfolio_item->id) }}" method="post" enctype="multipart/form-data">
                             @csrf
+                            @method('PUT')
                             <div class="form-group row mb-4">
                                 <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Image</label>
                                 <div class="col-sm-12 col-md-7">
@@ -32,7 +33,7 @@
                             <div class="form-group row mb-4">
                                 <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Title</label>
                                 <div class="col-sm-12 col-md-7">
-                                    <input type="text" name="title" class="form-control">
+                                    <input type="text" name="title" class="form-control" value="{{ $portfolio_item->title }}">
                                 </div>
                             </div>
                             <div class="form-group row mb-4">
@@ -41,7 +42,7 @@
                                     <select class="form-control selectric" name="category_id">
                                         <option>Select</option>
                                         @foreach ($categories as $category)
-                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                        <option {{ $category->id == $portfolio_item->category_id ? 'selected' : '' }} value="{{ $category->id }}">{{ $category->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -49,25 +50,25 @@
                             <div class="form-group row mb-4">
                                 <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Description</label>
                                 <div class="col-sm-12 col-md-7">
-                                    <textarea name="description" class="summernote"></textarea>
+                                    <textarea name="description" class="summernote">{!! $portfolio_item->description !!}</textarea>
                                 </div>
                             </div>
                             <div class="form-group row mb-4">
                                 <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Client</label>
                                 <div class="col-sm-12 col-md-7">
-                                    <input type="text" name="client" class="form-control">
+                                    <input type="text" name="client" class="form-control" value="{{ $portfolio_item->client }}">
                                 </div>
                             </div>
                             <div class="form-group row mb-4">
                                 <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Website</label>
                                 <div class="col-sm-12 col-md-7">
-                                    <input type="text" name="website" class="form-control">
+                                    <input type="text" name="website" class="form-control" value="{{ $portfolio_item->website }}">
                                 </div>
                             </div>
                             <div class="form-group row mb-4">
                                 <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
                                 <div class="col-sm-12 col-md-7">
-                                    <button class="btn btn-primary">Create</button>
+                                    <button class="btn btn-primary">Update</button>
                                 </div>
                             </div>
                         </form>
@@ -83,7 +84,7 @@
 <script>
     $(document).ready(function () {
         $('#image-preview').css({
-            'background-image': 'url("")',
+            'background-image': 'url("{{ asset($portfolio_item->image) }}")',
             'background-size': 'cover',
             'background-position': 'center center'
         });
