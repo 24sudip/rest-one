@@ -109,12 +109,20 @@
                             type: 'DELETE',
                             url: deleteUrl,
                             success: function (data) {
-                                Swal.fire({
-                                title: "Deleted!",
-                                text: "Your file has been deleted.",
-                                icon: "success"
-                                });
-                                window.location.reload();
+                                if (data.status == 'error') {
+                                    Swal.fire({
+                                    title: "You can not delete!",
+                                    text: "This category contains at least one item.",
+                                    icon: "error"
+                                    });
+                                } else {
+                                    Swal.fire({
+                                    title: "Deleted!",
+                                    text: "Your file has been deleted.",
+                                    icon: "success"
+                                    });
+                                    window.location.reload();
+                                }
                             },
                             error: function (xhr, status, error) {
                                 console.log(error);

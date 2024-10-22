@@ -15,9 +15,7 @@ Route::get('/blog-detail', function () {
     return view('frontend.blog-detail');
 });
 
-Route::get('/portfolio-detail', function () {
-    return view('frontend.portfolio-detail');
-});
+Route::get('/portfolio-details/{id}', [HomeController::class, 'showPortfolio'])->name('show.portfolio');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware(['auth', 'verified']);
 
