@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\{Route, Mail};
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Admin\{DashboardController, ProfileController, HeroController, TyperTitleController, ServiceController};
 use App\Http\Controllers\Admin\{AboutController, CategoryController, PortfolioItemController, PortfolioSettingController};
+use App\Http\Controllers\Admin\{SkillSettingController, SkillItemController, ExperienceController};
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -47,4 +48,13 @@ Route::group(['middleware'=>['auth'], 'prefix'=>'admin', 'as'=>'admin.'], functi
 
     /* Portfolio Section Setting Route */
     Route::resource('portfolio-section-setting', PortfolioSettingController::class);
+
+    /* Skill Section Setting Route */
+    Route::resource('skill-section-setting', SkillSettingController::class);
+
+    /* Skill Item Route */
+    Route::resource('skill-item', SkillItemController::class);
+
+    /* Experience Route */
+    Route::resource('experience', ExperienceController::class);
 });

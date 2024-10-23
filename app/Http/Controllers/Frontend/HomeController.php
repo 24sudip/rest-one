@@ -5,7 +5,8 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use File;
-use App\Models\{Hero, TyperTitle, Service, About, PortfolioSectionSetting, Category, PortfolioItem};
+use App\Models\{Hero, TyperTitle, Service, About, PortfolioSectionSetting, Category, PortfolioItem, SkillSectionSetting};
+use App\Models\SkillItem;
 
 class HomeController extends Controller
 {
@@ -18,6 +19,8 @@ class HomeController extends Controller
         $portfolio_section_setting = PortfolioSectionSetting::first();
         $categories = Category::all();
         $portfolio_items = PortfolioItem::all();
+        $skill = SkillSectionSetting::first();
+        $skill_items = SkillItem::all();
         return view('frontend.home',
         compact(
             'hero',
@@ -26,7 +29,9 @@ class HomeController extends Controller
             'about',
             'portfolio_section_setting',
             'categories',
-            'portfolio_items'
+            'portfolio_items',
+            'skill',
+            'skill_items'
         ));
     }
 
