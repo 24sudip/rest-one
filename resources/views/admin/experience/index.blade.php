@@ -33,25 +33,25 @@
                             <div class="form-group row mb-4">
                                 <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Title</label>
                                 <div class="col-sm-12 col-md-7">
-                                    <input type="text" name="title" class="form-control" value="">
+                                    <input type="text" name="title" class="form-control" value="{{ $experience->title }}">
                                 </div>
                             </div>
                             <div class="form-group row mb-4">
                                 <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Description</label>
                                 <div class="col-sm-12 col-md-7">
-                                    <textarea name="description" class="summernote"></textarea>
+                                    <textarea name="description" class="summernote">{!! $experience->description !!}</textarea>
                                 </div>
                             </div>
                             <div class="form-group row mb-4">
                                 <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Phone</label>
                                 <div class="col-sm-12 col-md-7">
-                                    <input type="tel" name="phone" class="form-control" value="">
+                                    <input type="tel" name="phone" class="form-control" value="{{ $experience->phone }}">
                                 </div>
                             </div>
                             <div class="form-group row mb-4">
                                 <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Email</label>
                                 <div class="col-sm-12 col-md-7">
-                                    <input type="email" name="email" class="form-control" value="">
+                                    <input type="email" name="email" class="form-control" value="{{ $experience->email }}">
                                 </div>
                             </div>
                             <div class="form-group row mb-4">
@@ -73,7 +73,7 @@
 <script>
     $(document).ready(function () {
         $('#image-preview').css({
-            'background-image': 'url("")',
+            'background-image': 'url("{{ asset($experience->image) }}")',
             'background-size': 'cover',
             'background-position': 'center center'
         });

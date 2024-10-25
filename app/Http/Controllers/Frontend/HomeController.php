@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use File;
 use App\Models\{Hero, TyperTitle, Service, About, PortfolioSectionSetting, Category, PortfolioItem, SkillSectionSetting};
-use App\Models\SkillItem;
+use App\Models\{SkillItem, Experience};
 
 class HomeController extends Controller
 {
@@ -21,6 +21,7 @@ class HomeController extends Controller
         $portfolio_items = PortfolioItem::all();
         $skill = SkillSectionSetting::first();
         $skill_items = SkillItem::all();
+        $experience = Experience::first();
         return view('frontend.home',
         compact(
             'hero',
@@ -31,7 +32,8 @@ class HomeController extends Controller
             'categories',
             'portfolio_items',
             'skill',
-            'skill_items'
+            'skill_items',
+            'experience'
         ));
     }
 
