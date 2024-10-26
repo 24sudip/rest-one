@@ -4,17 +4,15 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\FeedbackSetting;
 
-class FeedbackSettingController extends Controller
+class BlogCategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $feedback_settings = FeedbackSetting::first();
-        return view('admin.feedback-setting.index', compact('feedback_settings'));
+        //
     }
 
     /**
@@ -52,21 +50,9 @@ class FeedbackSettingController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, string $id)
     {
-        $request->validate([
-            'title'=>['required','max:100'],
-            'sub_title'=>['required','max:500'],
-        ]);
-        FeedbackSetting::updateOrCreate(
-            ['id'=>$id],
-            [
-                'title'=>$request->title,
-                'sub_title'=>$request->sub_title,
-            ]
-        );
-        toastr()->success('Uploaded Successfully.');
-        return redirect()->back();
+        //
     }
 
     /**
