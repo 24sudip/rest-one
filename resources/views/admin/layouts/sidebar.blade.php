@@ -94,7 +94,8 @@
                         <i class="fas fa-columns"></i> <span>Blog</span>
                     </a>
                     <ul class="dropdown-menu" style="display: none;">
-                        <li><a class="nav-link" href="">Blog Category</a></li>
+                        <li><a class="nav-link" href="{{ route('admin.blog-category.index') }}">Blog Category</a></li>
+                        <li><a class="nav-link" href="{{ route('admin.blog.index') }}">Blog List</a></li>
                         <li><a class="nav-link" href="">Section Setting</a></li>
                     </ul>
                 </li>
