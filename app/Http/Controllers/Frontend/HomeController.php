@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use File;
 use App\Models\{Hero, TyperTitle, Service, About, PortfolioSectionSetting, Category, PortfolioItem, SkillSectionSetting};
-use App\Models\{SkillItem, Experience, Feedback, FeedbackSetting};
+use App\Models\{SkillItem, Experience, Feedback, FeedbackSetting, Blog};
 
 class HomeController extends Controller
 {
@@ -24,6 +24,7 @@ class HomeController extends Controller
         $experience = Experience::first();
         $feedbacks = Feedback::all();
         $feedback_settings = FeedbackSetting::first();
+        $blogs = Blog::latest()->take(5)->get();
         return view('frontend.home',
         compact(
             'hero',
@@ -37,12 +38,25 @@ class HomeController extends Controller
             'skill_items',
             'experience',
             'feedbacks',
-            'feedback_settings'
+            'feedback_settings',
+            'blogs'
         ));
     }
 
     public function showPortfolio($id) {
         $portfolio_item = PortfolioItem::findOrFail($id);
         return view('frontend.portfolio-detail', compact('portfolio_item'));
+    }
+
+    public function showBlog($id) {
+        $blog = Blog::findOrFail($id);
+        $previousPost = Blog::where('id','<', $blog->id)->orderBy('id','desc')->first();
+        $nextPost = Blog::where('id','>', $blog->id)->orderBy('id','asc')->first();
+        return view('frontend.blog-detail', compact('blog','previousPost','nextPost'));
+    }
+
+    public function allBlog() {
+        $blogs = Blog::latest()->paginate(3);
+        return view('frontend.blog', compact('blogs'));
     }
 }

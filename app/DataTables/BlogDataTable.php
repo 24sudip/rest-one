@@ -22,7 +22,24 @@ class BlogDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', 'blog.action')
+            ->addColumn('image', function ($query) {
+                return '
+                <img src="'.asset($query->image).'" style="width:70px;">
+                ';
+            })
+            ->addColumn('category', function ($query) {
+                return $query->blogCategory->name;
+            })
+            ->addColumn('created_at', function ($query) {
+                return date('d-M-Y | H:i:s', strtotime($query->created_at));
+            })
+            ->addColumn('action', function ($query) {
+                return '
+                <a href="'.route('admin.blog.edit', $query->id).'" class="btn btn-primary me-2"><i class="fas fa-edit"></i></a>
+                <a href="'.route('admin.blog.destroy', $query->id).'" class="btn btn-danger delete-item"><i class="fas fa-trash"></i></a>
+                ';
+            })
+            ->rawColumns(['image','action'])
             ->setRowId('id');
     }
 
@@ -44,7 +61,7 @@ class BlogDataTable extends DataTable
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     //->dom('Bfrtip')
-                    ->orderBy(1)
+                    ->orderBy(0)
                     ->selectStyleSingle()
                     ->buttons([
                         Button::make('excel'),
@@ -62,15 +79,16 @@ class BlogDataTable extends DataTable
     public function getColumns(): array
     {
         return [
+            Column::make('id')->width(100),
+            Column::make('image')->width(200),
+            Column::make('title')->width(500),
+            Column::make('category')->width(200),
+            Column::make('created_at'),
             Column::computed('action')
                   ->exportable(false)
                   ->printable(false)
-                  ->width(60)
+                  ->width(200)
                   ->addClass('text-center'),
-            Column::make('id'),
-            Column::make('add your columns'),
-            Column::make('created_at'),
-            Column::make('updated_at'),
         ];
     }
 

@@ -9,15 +9,9 @@ use App\Http\Controllers\Admin\{FeedbackSettingController, BlogCategoryControlle
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::get('/blog', function () {
-    return view('frontend.blog');
-});
-
-Route::get('/blog-detail', function () {
-    return view('frontend.blog-detail');
-});
-
 Route::get('/portfolio-details/{id}', [HomeController::class, 'showPortfolio'])->name('show.portfolio');
+Route::get('/blog-details/{id}', [HomeController::class, 'showBlog'])->name('show.blog');
+Route::get('/blogs', [HomeController::class, 'allBlog'])->name('all.blog');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware(['auth', 'verified']);
 

@@ -28,13 +28,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        Paginator::useBootstrap();
+        Post::observe(PostObserver::class);
+        Gate::policy(Post::class, PostPolicy::class);
         Event::listen(
             UserRegistered::class,
             SendWelcomeEmail::class,
         );
-        Post::observe(PostObserver::class);
-        Paginator::useBootstrap();
-        Gate::policy(Post::class, PostPolicy::class);
         // Gate::define('create_post', function () {
         //     Auth::user()->is_admin;
         // });
