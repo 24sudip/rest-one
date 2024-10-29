@@ -96,7 +96,7 @@
                     <ul class="dropdown-menu" style="display: none;">
                         <li><a class="nav-link" href="{{ route('admin.blog-category.index') }}">Blog Category</a></li>
                         <li><a class="nav-link" href="{{ route('admin.blog.index') }}">Blog List</a></li>
-                        <li><a class="nav-link" href="">Section Setting</a></li>
+                        <li><a class="nav-link" href="{{ route('admin.blog-setting.index') }}">Section Setting</a></li>
                     </ul>
                 </li>
                 {{-- <li><a class="nav-link" href="auth-login.html"><i class="far fa-square"></i> <span>Login</span></a></li>

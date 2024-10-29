@@ -5,13 +5,14 @@ use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Admin\{DashboardController, ProfileController, HeroController, TyperTitleController, ServiceController};
 use App\Http\Controllers\Admin\{AboutController, CategoryController, PortfolioItemController, PortfolioSettingController};
 use App\Http\Controllers\Admin\{SkillSettingController, SkillItemController, ExperienceController, FeedbackController};
-use App\Http\Controllers\Admin\{FeedbackSettingController, BlogCategoryController, BlogController};
+use App\Http\Controllers\Admin\{FeedbackSettingController, BlogCategoryController, BlogController, BlogSettingController};
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/portfolio-details/{id}', [HomeController::class, 'showPortfolio'])->name('show.portfolio');
 Route::get('/blog-details/{id}', [HomeController::class, 'showBlog'])->name('show.blog');
 Route::get('/blogs', [HomeController::class, 'allBlog'])->name('all.blog');
+Route::post('/contact', [HomeController::class, 'contact'])->name('contact');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware(['auth', 'verified']);
 
@@ -64,4 +65,7 @@ Route::group(['middleware'=>['auth'], 'prefix'=>'admin', 'as'=>'admin.'], functi
 
     /* Blog Route */
     Route::resource('blog', BlogController::class);
+
+    /* Blog Setting Route */
+    Route::resource('blog-setting', BlogSettingController::class);
 });

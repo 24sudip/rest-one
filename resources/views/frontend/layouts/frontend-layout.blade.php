@@ -5,6 +5,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" id="csrf-token" content="{{ csrf_token() }}">
 	<title>Rabins | Personal Portfolio HTML Template</title>
 	<link rel="shortcut icon" type="image/ico" href="{{ asset('frontend_assets/images') }}/favicon.png" />
 	<link rel="stylesheet" href="{{ asset('frontend_assets/css') }}/bootstrap.min.css">
@@ -12,6 +13,7 @@
 	<link rel="stylesheet" href="{{ asset('frontend_assets/css') }}/style-plugin-collection.css">
 	<link rel="stylesheet" href="{{ asset('frontend_assets/css') }}/theme.css">
 	<link rel="stylesheet" href="{{ asset('frontend_assets/css') }}/responsive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 </head>
 
 <body>
@@ -36,6 +38,7 @@
 	<script src="{{ asset('frontend_assets/js') }}/bootstrap.bundle.min.js"></script>
 	<script src="{{ asset('frontend_assets/js') }}/contact-form.js"></script>
 	<script src="{{ asset('frontend_assets/js') }}/jquery-plugin-collection.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 	<script src="{{ asset('frontend_assets/js') }}/vendor/modernizr.js"></script>
 	<script src="{{ asset('frontend_assets/js') }}/main.js"></script>
     @stack('scripts')

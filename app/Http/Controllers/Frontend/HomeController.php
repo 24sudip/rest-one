@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use File;
 use App\Models\{Hero, TyperTitle, Service, About, PortfolioSectionSetting, Category, PortfolioItem, SkillSectionSetting};
-use App\Models\{SkillItem, Experience, Feedback, FeedbackSetting, Blog};
+use App\Models\{SkillItem, Experience, Feedback, FeedbackSetting, Blog, BlogSetting};
 
 class HomeController extends Controller
 {
@@ -25,6 +25,7 @@ class HomeController extends Controller
         $feedbacks = Feedback::all();
         $feedback_settings = FeedbackSetting::first();
         $blogs = Blog::latest()->take(5)->get();
+        $blog_settings = BlogSetting::first();
         return view('frontend.home',
         compact(
             'hero',
@@ -39,7 +40,8 @@ class HomeController extends Controller
             'experience',
             'feedbacks',
             'feedback_settings',
-            'blogs'
+            'blogs',
+            'blog_settings'
         ));
     }
 
@@ -58,5 +60,14 @@ class HomeController extends Controller
     public function allBlog() {
         $blogs = Blog::latest()->paginate(3);
         return view('frontend.blog', compact('blogs'));
+    }
+
+    public function contact(Request $request) {
+        $request->validate([
+            'name'=>['required','max:200'],
+            'subject'=>['required','max:300'],
+            'email'=>['required','email'],
+            'message'=>['required','max:2000'],
+        ]);
     }
 }
