@@ -4,11 +4,9 @@
         <div class="row">
             <div class="col-lg-6 offset-lg-3 text-center">
                 <div class="section-title">
-                    <h3 class="title">Lets Work Together</h3>
+                    <h3 class="title">{{ $contact_settings->title }}</h3>
                     <div class="desc">
-                        <p>Earum quos animi numquam excepturi eveniet explicabo repellendus rem esse.
-                            Quae quasi
-                            odio enim.</p>
+                        <p>{{ $contact_settings->sub_title }}</p>
                     </div>
                 </div>
             </div>
@@ -84,7 +82,12 @@
                     $('#submit_btn').text('Loading...');
                 },
                 success: function (response) {
-                    console.log(response);
+                    if (response.status == 'success') {
+                        toastr.success(response.message);
+                        $('#submit_btn').prop("disabled", false);
+                        $('#submit_btn').text('Send Now');
+                        $('#contact-form').trigger('reset');
+                    }
                 },
                 error: function (response) {
                     if (response.status == 422) {

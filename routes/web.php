@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\{DashboardController, ProfileController, HeroCont
 use App\Http\Controllers\Admin\{AboutController, CategoryController, PortfolioItemController, PortfolioSettingController};
 use App\Http\Controllers\Admin\{SkillSettingController, SkillItemController, ExperienceController, FeedbackController};
 use App\Http\Controllers\Admin\{FeedbackSettingController, BlogCategoryController, BlogController, BlogSettingController};
+use App\Http\Controllers\Admin\{ContactSettingController, SocialLinkController, FooterInfoController};
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -68,4 +69,13 @@ Route::group(['middleware'=>['auth'], 'prefix'=>'admin', 'as'=>'admin.'], functi
 
     /* Blog Setting Route */
     Route::resource('blog-setting', BlogSettingController::class);
+
+    /* Contact Setting Route */
+    Route::resource('contact-setting', ContactSettingController::class);
+
+    /* Footer Social Link Route */
+    Route::resource('social-link', SocialLinkController::class);
+
+    /* Footer Info Route */
+    Route::resource('footer-info', FooterInfoController::class);
 });

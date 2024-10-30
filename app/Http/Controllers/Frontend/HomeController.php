@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use File;
 use App\Models\{Hero, TyperTitle, Service, About, PortfolioSectionSetting, Category, PortfolioItem, SkillSectionSetting};
-use App\Models\{SkillItem, Experience, Feedback, FeedbackSetting, Blog, BlogSetting};
+use App\Models\{SkillItem, Experience, Feedback, FeedbackSetting, Blog, BlogSetting, ContactSetting};
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ContactMail;
 
 class HomeController extends Controller
 {
@@ -26,6 +28,7 @@ class HomeController extends Controller
         $feedback_settings = FeedbackSetting::first();
         $blogs = Blog::latest()->take(5)->get();
         $blog_settings = BlogSetting::first();
+        $contact_settings = ContactSetting::first();
         return view('frontend.home',
         compact(
             'hero',
@@ -41,7 +44,8 @@ class HomeController extends Controller
             'feedbacks',
             'feedback_settings',
             'blogs',
-            'blog_settings'
+            'blog_settings',
+            'contact_settings'
         ));
     }
 
@@ -69,5 +73,7 @@ class HomeController extends Controller
             'email'=>['required','email'],
             'message'=>['required','max:2000'],
         ]);
+        Mail::send(new ContactMail($request->all()));
+        return response(['status'=>'success','message'=>'Mail Sended Successfully!']);
     }
 }
