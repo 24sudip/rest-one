@@ -4,17 +4,17 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\FooterInfo;
+use App\Models\ContactInfo;
 
-class FooterInfoController extends Controller
+class ContactInfoController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $footer_infos = FooterInfo::first();
-        return view('admin.footer-info.index', compact('footer_infos'));
+        $contact_infos = ContactInfo::first();
+        return view('admin.footer-contact-info.index', compact('contact_infos'));
     }
 
     /**
@@ -55,16 +55,16 @@ class FooterInfoController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'info'=>['max:200'],
-            'copy_right'=>['max:200'],
-            'powered_by'=>['max:200']
+            'address'=>['max:500'],
+            'phone'=>['max:50'],
+            'email'=>['email','max:200']
         ]);
-        FooterInfo::updateOrCreate(
+        ContactInfo::updateOrCreate(
             ['id'=>$id],
             [
-                'info'=>$request->info,
-                'copy_right'=>$request->copy_right,
-                'powered_by'=>$request->powered_by
+                'address'=>$request->address,
+                'phone'=>$request->phone,
+                'email'=>$request->email
             ]
         );
         toastr()->success('Uploaded Successfully.');

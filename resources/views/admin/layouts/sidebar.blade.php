@@ -114,6 +114,8 @@
                     <ul class="dropdown-menu" style="display: none;">
                         <li><a class="nav-link" href="{{ route('admin.social-link.index') }}">Social Links</a></li>
                         <li><a class="nav-link" href="{{ route('admin.footer-info.index') }}">Footer Information</a></li>
+                        <li><a class="nav-link" href="{{ route('admin.contact-info.index') }}">Contact Info</a></li>
+                        <li><a class="nav-link" href="{{ route('admin.useful-link.index') }}">Useful Links</a></li>
                         <li><a class="nav-link" href="">test</a></li>
                     </ul>
                 </li>

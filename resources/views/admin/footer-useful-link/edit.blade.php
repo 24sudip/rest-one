@@ -1,13 +1,13 @@
-<!-- Smile, breathe, and go slowly. - Thich Nhat Hanh -->
+<!-- Order your soul. Reduce your wants. - Augustine -->
 @extends('admin.layouts.admin-layout')
 
 @section('admin_content')
 <section class="section">
     <div class="section-header">
         <div class="section-header-back">
-            <a href="features-posts.html" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
+            <a href="#" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
         </div>
-        <h1>Footer Information</h1>
+        <h1>Footer Useful Link</h1>
     </div>
 
     <div class="section-body">
@@ -15,28 +15,22 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Update Footer Info</h4>
+                        <h4>Edit Useful Link</h4>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('admin.footer-info.update', 1) }}" method="post" enctype="multipart/form-data">
+                        <form action="{{ route('admin.useful-link.update', $useful_link->id) }}" method="post" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <div class="form-group row mb-4">
-                                <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Info</label>
+                                <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Name</label>
                                 <div class="col-sm-12 col-md-7">
-                                    <textarea name="info" class="form-control" style="height: 100px;">{{ $footer_infos->info }}</textarea>
+                                    <input type="text" name="name" class="form-control" value="{{ $useful_link->name }}">
                                 </div>
                             </div>
                             <div class="form-group row mb-4">
-                                <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Copy right</label>
+                                <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Url</label>
                                 <div class="col-sm-12 col-md-7">
-                                    <input type="text" name="copy_right" class="form-control" value="{{ $footer_infos->copy_right }}">
-                                </div>
-                            </div>
-                            <div class="form-group row mb-4">
-                                <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Powered by</label>
-                                <div class="col-sm-12 col-md-7">
-                                    <input type="text" name="powered_by" class="form-control" value="{{ $footer_infos->powered_by }}">
+                                    <input type="text" name="url" class="form-control" value="{{ $useful_link->url }}">
                                 </div>
                             </div>
                             <div class="form-group row mb-4">

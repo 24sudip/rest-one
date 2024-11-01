@@ -11,11 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('footer_infos', function (Blueprint $table) {
+        Schema::create('useful_links', function (Blueprint $table) {
             $table->id();
-            $table->string('info')->nullable();
-            $table->string('copy_right')->nullable();
-            $table->string('powered_by')->nullable();
+            $table->string('name');
+            $table->text('url');
             $table->timestamps();
         });
     }
@@ -25,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('footer_infos');
+        Schema::dropIfExists('useful_links');
     }
 };

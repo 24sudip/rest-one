@@ -5,13 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class FooterInfo extends Model
+class ContactInfo extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'info',
-        'copy_right',
-        'powered_by'
+        'address',
+        'phone',
+        'email'
     ];
 }
