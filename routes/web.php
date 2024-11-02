@@ -7,7 +7,8 @@ use App\Http\Controllers\Admin\{AboutController, CategoryController, PortfolioIt
 use App\Http\Controllers\Admin\{SkillSettingController, SkillItemController, ExperienceController, FeedbackController};
 use App\Http\Controllers\Admin\{FeedbackSettingController, BlogCategoryController, BlogController, BlogSettingController};
 use App\Http\Controllers\Admin\{ContactSettingController, SocialLinkController, FooterInfoController, ContactInfoController};
-use App\Http\Controllers\Admin\UsefulLinkController;
+use App\Http\Controllers\Admin\{UsefulLinkController, HelpLinkController, SettingController, GeneralSettingController};
+use App\Http\Controllers\Admin\SeoSettingController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -85,4 +86,16 @@ Route::group(['middleware'=>['auth'], 'prefix'=>'admin', 'as'=>'admin.'], functi
 
     /* Footer Useful Link Route */
     Route::resource('useful-link', UsefulLinkController::class);
+
+    /* Footer Help Link Route */
+    Route::resource('help-link', HelpLinkController::class);
+
+    /* Setting Route */
+    Route::get('setting', SettingController::class)->name('setting.index');
+
+    /* General Setting Route */
+    Route::resource('general-setting', GeneralSettingController::class);
+
+    /* Seo Setting Route */
+    Route::resource('seo-setting', SeoSettingController::class);
 });

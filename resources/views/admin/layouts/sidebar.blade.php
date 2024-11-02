@@ -36,17 +36,17 @@
             </div>
             <ul class="sidebar-menu">
                 <li class="menu-header">Dashboard</li>
-                <li class="nav-item active">
-                    <a href="index.html" class="nav-link"><i class="fas fa-fire"></i><span>Dashboard</span></a>
+                <li class="nav-item">
+                    <a href="{{ route('dashboard') }}" class="nav-link"><i class="fas fa-fire"></i><span>Dashboard</span></a>
                 </li>
-                <li class="nav-item dropdown">
+                {{-- <li class="nav-item dropdown">
                     <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
                         <i class="fas fa-columns"></i> <span>Dropdown</span>
                     </a>
                     <ul class="dropdown-menu" style="display: none;">
                         <li><a class="nav-link" href="">test</a></li>
                     </ul>
-                </li>
+                </li> --}}
                 <li class="menu-header">Sections</li>
                 <li class="nav-item dropdown">
                     <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
@@ -107,20 +107,27 @@
                         <li><a class="nav-link" href="{{ route('admin.contact-setting.index') }}">Section Setting</a></li>
                     </ul>
                 </li>
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown {{ setSidebarActive([
+                'admin.social-link.*',
+                'admin.footer-info.*',
+                'admin.contact-info.*',
+                'admin.useful-link.*',
+                'admin.help-link.*'
+                ]) }}">
                     <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
                         <i class="fas fa-columns"></i> <span>Footer</span>
                     </a>
                     <ul class="dropdown-menu" style="display: none;">
-                        <li><a class="nav-link" href="{{ route('admin.social-link.index') }}">Social Links</a></li>
-                        <li><a class="nav-link" href="{{ route('admin.footer-info.index') }}">Footer Information</a></li>
-                        <li><a class="nav-link" href="{{ route('admin.contact-info.index') }}">Contact Info</a></li>
-                        <li><a class="nav-link" href="{{ route('admin.useful-link.index') }}">Useful Links</a></li>
-                        <li><a class="nav-link" href="">test</a></li>
+                        <li class="{{ setSidebarActive(['admin.social-link.*']) }}"><a class="nav-link" href="{{ route('admin.social-link.index') }}">Social Links</a></li>
+                        <li class="{{ setSidebarActive(['admin.footer-info.*']) }}"><a class="nav-link" href="{{ route('admin.footer-info.index') }}">Footer Information</a></li>
+                        <li class="{{ setSidebarActive(['admin.contact-info.*']) }}"><a class="nav-link" href="{{ route('admin.contact-info.index') }}">Contact Info</a></li>
+                        <li class="{{ setSidebarActive(['admin.useful-link.*']) }}"><a class="nav-link" href="{{ route('admin.useful-link.index') }}">Useful Links</a></li>
+                        <li class="{{ setSidebarActive(['admin.help-link.*']) }}"><a class="nav-link" href="{{ route('admin.help-link.index') }}">Help Links</a></li>
                     </ul>
                 </li>
-                {{-- <li><a class="nav-link" href="auth-login.html"><i class="far fa-square"></i> <span>Login</span></a></li>
-                <li><a class="nav-link" href="auth-register.html"><i class="far fa-square"></i> <span>Register</span></a></li>
+                <li class="menu-header">Settings</li>
+                <li class="{{ setSidebarActive(['admin.setting.*']) }}"><a class="nav-link" href="{{ route('admin.setting.index') }}"><i class="far fa-square"></i> <span>Setting</span></a></li>
+                {{-- <li><a class="nav-link" href="auth-register.html"><i class="far fa-square"></i> <span>Register</span></a></li>
                 <li><a class="nav-link" href="auth-forgot-password.html"><i class="far fa-square"></i> <span>Forgot password</span></a></li> --}}
 
             </ul>
